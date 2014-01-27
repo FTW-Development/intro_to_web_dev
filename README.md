@@ -5,7 +5,7 @@ We'll be doing a very cursory look at git, and a lay of the land of rails.
 Presentation by FTW Development @ftwdevelopment
 Hunter Barrington @hbarrin
 
-source found at * http://somewhere.com
+source found [here](https://github.com/FTW-Development/intro_to_web_dev)
 
 This talk should last an hour
 
