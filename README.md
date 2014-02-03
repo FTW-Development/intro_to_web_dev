@@ -77,7 +77,77 @@ http://git-scm.com/book/en/Git-Basics
 # Start Configuring our App
 Let's add a bunch of gems to make development more fun and a bit easier. We'll also use mysql rather than sqlite (consider nosql solutions like MongoDB or CouchDB)
 
+Code for `Gemfile`:
+    gem 'mysql2'
+    group :development do
+      gem 'thin'
+      gem 'growl'
+      gem 'guard'
+      gem 'guard-bundler'
+      gem 'guard-livereload'
+      gem 'guard-rails'
+      gem 'guard-rspec'
+      gem 'rack-livereload'
+      gem 'capistrano'
+      gem 'capistrano-unicorn'
+      gem 'rvm-capistrano'
+      gem 'rb-fsevent', :require => false
+      gem 'rb-inotify', :require => false
+      gem 'rb-fchange', :require => false
+    end
 
+    group :development, :test do
+      gem 'rspec-rails'
+      gem 'factory_girl_rails'
+    end
+
+    group :test do
+      gem 'cucumber-rails', :require => false
+      gem 'launchy'
+      gem 'capybara'
+      gem 'database_cleaner'
+      gem 'email_spec'
+    end
+
+Code for `config/database.yml`:
+    development:
+      adapter: mysql2
+      encoding: utf8
+      database: timetracker_dev
+      username: root
+      password:
+      pool: 5
+      timeout: 5000
+
+    # Warning: The database defined as "test" will be erased and
+    # re-generated from your development database when you run "rake".
+    # Do not set this db to the same as development or production.
+    test:
+      adapter: mysql2
+      encoding: utf8
+      database: timetracker_test
+      username: root
+      password:
+      pool: 5
+      timeout: 5000
+
+    staging:
+      adapter: mysql2
+      encoding: utf8
+      database: timetracker_prod
+      username: root
+      password: <%= begin IO.read("/home/rails/.myapp_db") rescue "" end %>
+      pool: 5
+      timeout: 5000
+
+    production:
+      adapter: mysql2
+      encoding: utf8
+      database: timetracker_prod
+      username: root
+      password: <%= begin IO.read("/home/rails/.myapp_db") rescue "" end %>
+      pool: 5
+      timeout: 5000
 
 
 # Creat our first model and some base code
