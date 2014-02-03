@@ -78,6 +78,7 @@ http://git-scm.com/book/en/Git-Basics
 Let's add a bunch of gems to make development more fun and a bit easier. We'll also use mysql rather than sqlite (consider nosql solutions like MongoDB or CouchDB)
 
 Code for `Gemfile`:
+
     gem 'mysql2'
     group :development do
       gem 'thin'
@@ -110,6 +111,7 @@ Code for `Gemfile`:
     end
 
 Code for `config/database.yml`:
+
     development:
       adapter: mysql2
       encoding: utf8
@@ -149,6 +151,11 @@ Code for `config/database.yml`:
       pool: 5
       timeout: 5000
 
+Code:
+* `bundle update`
+* `rails s`
+
+Does it work?
 
 # Creat our first model and some base code
 We'll use scaffolding to create the whole MVC structure for a new model and its associated functionality
