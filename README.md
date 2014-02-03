@@ -36,14 +36,35 @@ Code:
 * `rails new fantasy_coding`
 
 # Take a look at what came out
+
 * Gemfile - list of gems (libraries) installed by default
 * config - configuration files for the project
+    * convention vs configuration (Rails takes a middle [or slightly left of middle] approach)
+    * database, environments, gem/plugins
 * app - application code
+    * MVC
+    * some other stuff (workers, mailers, assets, etc...)
+
+Code:
+* `rails s`
+* http://localhost:3000
+
+A quick note: There's help all over the place
+Other things Rails cares about:
+* DRY - Don't Repeat Yourself (OOP)
+* Good API design
+* Simple and elegant solutions
+
+Things Rails isn't so great at
+* Realtime applications/event-driven apps (check out nodejs)
+* Having one source of truth about best practices, gems to use, or even documentation
 
 # Initialize
 * `touch .ruby-version < "ruby-2.0"`
 * `touch .ruby-gemset < "fantasy-coding"`
 * `git init`
+* `git add -A`
+* `git commit -m "initial commit"`
 * `git remote add origin URLGOESHERE` - if you have a remote
 
 # Super Brief Git vs SVN
@@ -53,4 +74,13 @@ http://git-scm.com/book/en/Getting-Started-About-Version-Control
 
 http://git-scm.com/book/en/Git-Basics
 
-# 
+# Start Configuring our App
+Let's add a bunch of gems to make development more fun and a bit easier. We'll also use mysql rather than sqlite (consider nosql solutions like MongoDB or CouchDB)
+
+
+
+
+# Creat our first model and some base code
+We'll use scaffolding to create the whole MVC structure for a new model and its associated functionality
+
+
