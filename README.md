@@ -115,7 +115,7 @@ Code for `config/database.yml`:
     development:
       adapter: mysql2
       encoding: utf8
-      database: timetracker_dev
+      database: fantasy_coding_dev
       username: root
       password:
       pool: 5
@@ -127,7 +127,7 @@ Code for `config/database.yml`:
     test:
       adapter: mysql2
       encoding: utf8
-      database: timetracker_test
+      database: fantasy_coding_test
       username: root
       password:
       pool: 5
@@ -136,7 +136,7 @@ Code for `config/database.yml`:
     staging:
       adapter: mysql2
       encoding: utf8
-      database: timetracker_prod
+      database: fantasy_coding_prod
       username: root
       password: <%= begin IO.read("/home/rails/.myapp_db") rescue "" end %>
       pool: 5
@@ -145,7 +145,7 @@ Code for `config/database.yml`:
     production:
       adapter: mysql2
       encoding: utf8
-      database: timetracker_prod
+      database: fantasy_coding_prod
       username: root
       password: <%= begin IO.read("/home/rails/.myapp_db") rescue "" end %>
       pool: 5
@@ -153,11 +153,23 @@ Code for `config/database.yml`:
 
 Code:
 * `bundle update`
+* `rake db:create`
 * `rails s`
 
 Does it work?
 
 # Creat our first model and some base code
 We'll use scaffolding to create the whole MVC structure for a new model and its associated functionality
+
+Code:
+* `rails g scaffold Coder first:string last:string age:integer features_completed:integer commits_per_season:float pull_requests:integer`
+* `rake db:migrate`
+
+Code for `config/routes.rb`:
+
+    resources :coders
+    root :to => 'coders#index'
+
+Check out http://localhost:3000 now!
 
 
