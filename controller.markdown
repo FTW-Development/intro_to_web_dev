@@ -45,9 +45,32 @@ we added to `config/routes.rb` will create and instance of the class below and r
  		
   	end
 
-# Views
+Any variable's defined in the controller, in this case `@coders` can then be accessed in the accompanying view that we'll see in the next slide.
+
+# Controller with Views
 	
-Rails
+In accordance with the "convention over configuration" principle, Rails will automatically look for the `action_name.html.erb` template and render it. In our case, this would be `app/views/coders/index.html.erb`.
+
+Let's look at that file and see how the `@coder` variable and accompanying, inherited methods that come from the controller.
+
+So that's how data is passed to the view, let's look at how it's passed back.
+
+# Form Submission
+
+Going back to the controller, let's look at the `new` method.
  
-  		
+  		# GET /coders/new
+  		def new
+    		@coder = Coder.new
+ 		end
+ 		
+when /coders/new is requested, just like before, Rails automatically looks for new.html.erb:
+
+	<h1>New coder</h1>
+
+	<%= render 'form' %>
+
+	<%= link_to 'Back', coders_path %>
+
+`render 'form'` tells rails to look for _form.html.erb
   
