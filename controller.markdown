@@ -64,7 +64,7 @@ Going back to the controller, let's look at the `new` method.
     		@coder = Coder.new
  		end
  		
-when /coders/new is requested, just like before, Rails automatically looks for new.html.erb:
+when `/coders/new` is requested, just like before, Rails automatically looks for new.html.erb:
 
 	<h1>New coder</h1>
 
@@ -72,5 +72,47 @@ when /coders/new is requested, just like before, Rails automatically looks for n
 
 	<%= link_to 'Back', coders_path %>
 
-`render 'form'` tells rails to look for _form.html.erb
-  
+`render 'form'` tells rails to look for _form.html.erb. `render` can also be used in controllers to explicitly specify which view to render. An example:
+
+	def update
+  		@coders = Coder.find(params[:id])
+  		if @coder.update(params[:coder])
+    		redirect_to(@coder)
+  		else
+    		render "edit"
+  		end
+	end
+ 
+This will render the `views/coders/edit.html.erb` file. 
+
+Let's look at the _form.html.erb.
+
+# Accessing Post Data
+When the form is submitted, the `create` method in the controller is ran and the data is passed via a post object, which can be accessed using `params` as shown in this private method in the controller.
+
+	def coder_params
+      	params.require(:coder).permit(:first, :last, :age, :features_completed, :commits_per_season, :pull_requests)
+    end
+    
+    # POST /coders
+    # POST /coders.json
+    def create
+    	@coder = Coder.new(coder_params)
+
+    	respond_to do |format|
+      		if @coder.save
+        		format.html { redirect_to @coder, notice: 'Coder was successfully created.' }
+        		format.json { render action: 'show', status: :created, location: @coder }
+      		else
+        		format.html { render action: 'new' }
+        		format.json { render json: @coder.errors, status: :unprocessable_entity }
+      		end
+    	end
+ 	end
+    
+If it can properly save the coder data, then the `redirect_to` method, which redirects to any URL, redirects to that coder that was just create, which runs the show method, and of course then renders the show.html.erb.
+
+	# GET /coders/1
+  	# GET /coders/1.json
+  	def show
+  	end
