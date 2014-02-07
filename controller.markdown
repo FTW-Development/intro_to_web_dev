@@ -88,7 +88,7 @@ This will render the `views/coders/edit.html.erb` file.
 Let's look at the _form.html.erb.
 
 # Accessing Post Data
-When the form is submitted, the `create` method in the controller is ran and the data is passed via a post object, which can be accessed using `params` as shown in this private method in the controller.
+When the form is submitted, the `create` method in the controller is ran and the POST data is passed via an HTTP POST request, which can be accessed using `params` as shown in `coder_params` below.
 
 	def coder_params
       	params.require(:coder).permit(:first, :last, :age, :features_completed, :commits_per_season, :pull_requests)
@@ -109,10 +109,18 @@ When the form is submitted, the `create` method in the controller is ran and the
       		end
     	end
  	end
-    
-If it can properly save the coder data, then the `redirect_to` method, which redirects to any URL, redirects to that coder that was just created, which runs the show method, and of course then renders the show.html.erb.
+
+Rails does not make a distinction between query string parameters and POST parameters, and both are available in the params hash in the controller. Because `params` is a hash, variables can also be accessed with `params[:first]`.
+
+Moving on in the code above, if it can properly save the coder data, then the `redirect_to` method, which redirects to any URL, redirects to that coder that was just created, which runs the show method, and of course then renders the show.html.erb.
 
 	# GET /coders/1
   	# GET /coders/1.json
   	def show
   	end
+
+It's worth noting that we've cover two fo the three ways to create an HTTP response:
+
+* Call render to create a full response to send back to the browser
+* Call redirect_to to send an HTTP redirect status code to the browser
+* Call head to create a response consisting solely of HTTP headers to send back to the browser
